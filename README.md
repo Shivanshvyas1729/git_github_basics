@@ -7,6 +7,11 @@
 <img width="517" height="284" alt="image" src="https://github.com/user-attachments/assets/5e004aeb-43b2-4355-855c-f9131bb884aa" />
 
 
+- The Git Workflow FlowchartWorking Directory:
+- You modify your files here.Staging Area: 
+- You run git add to prepare files for a commit.
+- Local Repository: You run git commit.
+- Your files are now safely stored in Git's history.
 
 
 <img width="654" height="228" alt="image" src="https://github.com/user-attachments/assets/c22ff853-5bec-48f4-8bdd-c12530b24f74" />
