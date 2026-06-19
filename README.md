@@ -3,8 +3,8 @@
 
 
 
+<img width="1000" height="510" alt="image" src="https://github.com/user-attachments/assets/2c419479-b51b-4b2f-8030-53cf944ea089" />
 
-<img width="517" height="284" alt="image" src="https://github.com/user-attachments/assets/5e004aeb-43b2-4355-855c-f9131bb884aa" />
 
 
 - The Git Workflow FlowchartWorking Directory:
