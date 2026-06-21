@@ -26,6 +26,9 @@
 
 
 <img width="772" height="282" alt="image" src="https://github.com/user-attachments/assets/88eea5ab-ac3f-4268-b1e2-da62c45c7661" />
-----------------------------------------------------------------------------------------------------------------------------------------
-# TO CREATE AND CHECKOUT AT SAME TIME
-git checkout -b [yourbranchname]
+
+
+----------------------------------------------------------------------
+## TO CREATE AND CHECKOUT AT SAME TIME
+
+### git checkout -b [yourbranchname]
