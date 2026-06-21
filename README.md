@@ -109,4 +109,9 @@ To:
 Example:
 
 git checkout a1b2c3d
+
+or
+
+<img width="1534" height="771" alt="image" src="https://github.com/user-attachments/assets/ee4d7e93-b713-47fc-891e-3f629011f5e9" />
+
 <details>
