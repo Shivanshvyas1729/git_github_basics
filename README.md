@@ -80,3 +80,56 @@ git rebase main
 </details>
 
 
+
+
+
+<details>
+<summary>Deattaching Head</summary>
+What is Detaching HEAD in Git?
+
+Normally, HEAD points to a branch, and the branch points to the latest commit.
+
+Example:
+
+HEAD -> main -> C1
+
+Here:
+
+HEAD = your current position
+main = branch name
+C1 = latest commit on main
+
+This means you're working on the main branch.
+
+What happens when HEAD is detached?
+
+If you checkout a specific commit instead of a branch:
+
+git checkout C1
+
+(or)
+
+git switch --detach C1
+
+Git changes to:
+
+HEAD -> C1
+main -> C3
+
+Now HEAD points directly to a commit, not to a branch.
+
+This is called a detached HEAD state.
+
+Why would you do this?
+
+To:
+
+View old versions of the project
+Test code at a previous commit
+Debug issues in historical commits
+Explore history without affecting branches
+
+Example:
+
+git checkout a1b2c3d
+<details>
