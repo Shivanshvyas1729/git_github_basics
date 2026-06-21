@@ -115,3 +115,99 @@ or
 <img width="1534" height="771" alt="image" src="https://github.com/user-attachments/assets/ee4d7e93-b713-47fc-891e-3f629011f5e9" />
 
 <details>
+
+
+
+
+
+<details>
+<summary>Relative References (Relative Refs) in Git</summary>
+
+
+
+Using full commit hashes to move around in Git can be inconvenient because hashes are long and difficult to remember. Instead, Git provides **relative references**, which let you navigate the commit history relative to a known location such as a branch name or `HEAD`.
+
+### 1. Caret (`^`) Operator
+
+The `^` operator refers to the **parent commit** of a commit.
+
+Example:
+
+```text
+A --- B --- C (main)
+```
+
+* `main` → commit `C`
+* `main^` → commit `B` (parent of `C`)
+* `main^^` → commit `A` (grandparent of `C`)
+
+Each additional `^` moves one commit further back in history.
+
+Example:
+
+```bash
+git checkout main^
+```
+
+This checks out the parent of the commit pointed to by `main`.
+
+---
+
+### 2. Tilde (`~`) Operator
+
+The `~` operator moves back a specified number of commits.
+
+Example:
+
+```text
+A --- B --- C --- D (main)
+```
+
+* `main~1` → `C`
+* `main~2` → `B`
+* `main~3` → `A`
+
+Example:
+
+```bash
+git checkout main~2
+```
+
+This checks out the commit that is two generations before `main`.
+
+---
+
+### Why Use Relative References?
+
+Instead of remembering long commit hashes like:
+
+```text
+fed2da64c0efc5293610bdd892f82a58e8cbc5d8
+```
+
+you can simply use:
+
+```bash
+git checkout main^
+git checkout HEAD~3
+```
+
+Relative references make navigating Git history much easier and more readable.
+
+### Summary
+
+* `^` = Move to the parent commit.
+* `^^` = Move to the grandparent commit.
+* `~n` = Move back `n` commits.
+* Works with branch names (`main`, `feature`) and `HEAD`.
+
+Examples:
+
+```bash
+git checkout main^
+git checkout main~3
+git checkout HEAD^^
+git checkout HEAD~5
+```
+
+<details>
