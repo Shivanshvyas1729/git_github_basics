@@ -114,7 +114,7 @@ or
 
 <img width="1534" height="771" alt="image" src="https://github.com/user-attachments/assets/ee4d7e93-b713-47fc-891e-3f629011f5e9" />
 
-<details>
+</details>
 
 
 
@@ -210,4 +210,4 @@ git checkout HEAD^^
 git checkout HEAD~5
 ```
 
-<details>
+</details>
