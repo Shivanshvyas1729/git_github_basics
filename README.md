@@ -211,3 +211,85 @@ git checkout HEAD~5
 ```
 
 </details>
+
+
+
+<details>
+<summary> Branch Forcing (`git branch -f`) </summary>
+
+
+
+
+
+
+
+Git allows you to move a branch pointer directly to another commit using the `-f` (**force**) option.
+
+#### Syntax
+
+```bash
+git branch -f <branch-name> <target-commit>
+```
+
+#### Example
+
+```bash
+git branch -f main HEAD~3
+```
+
+This command moves the `main` branch to the commit that is **3 commits behind `HEAD`**.
+
+Example:
+
+```text
+A --- B --- C --- D --- E (HEAD, main)
+```
+
+After running:
+
+```bash
+git branch -f main HEAD~3
+```
+
+The branch pointer moves:
+
+```text
+A --- B (main)
+       \
+        C --- D --- E (HEAD)
+```
+
+Here, `main` now points to commit `B`, which is three commits behind `HEAD`.
+
+#### Why Use Branch Forcing?
+
+* Move a branch to a specific commit.
+* Correct a branch that points to the wrong commit.
+* Practice Git history manipulation in learning environments.
+
+#### Important Note
+
+In a real Git repository, you **cannot force-move the branch you are currently on**.
+
+For example, if `HEAD` is attached to `main`, the following command will fail:
+
+```bash
+git branch -f main HEAD~3
+```
+
+You must first switch to another branch:
+
+```bash
+git checkout feature
+git branch -f main HEAD~3
+```
+
+#### Summary
+
+* `git branch -f` forcefully moves a branch pointer.
+* It does not create new commits.
+* It is commonly used with relative references such as `HEAD~n`.
+* You cannot force-move the branch that `HEAD` is currently attached to.
+
+</details>
+
