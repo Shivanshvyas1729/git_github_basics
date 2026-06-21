@@ -214,6 +214,8 @@ git checkout HEAD~5
 
 
 
+
+
 <details>
 <summary> Branch Forcing (`git branch -f`) </summary>
 
@@ -293,3 +295,150 @@ git branch -f main HEAD~3
 
 </details>
 
+
+
+
+
+<details>
+<summary>Reversing Changes in Git</summary>
+
+
+
+
+
+
+Git provides two common ways to undo changes:
+
+1. **`git reset`** → Removes commits by moving a branch backward.
+2. **`git revert`** → Creates a new commit that undoes the changes from an earlier commit.
+
+---
+
+## 1. Git Reset
+
+### Definition
+
+`git reset` moves a branch pointer back to an older commit, making newer commits appear as if they never happened.
+
+### Example
+
+Before:
+
+```text id="qrr1s0"
+A --- B --- C (main)
+```
+
+Run:
+
+```bash id="9e1w11"
+git reset --hard B
+```
+
+After:
+
+```text id="5i2x2g"
+A --- B (main)
+```
+
+Commit `C` is no longer part of the branch history.
+
+### Easy Analogy
+
+Imagine editing a document:
+
+```text id="ryz43t"
+Version 1 → Version 2 → Version 3
+```
+
+Using `git reset` is like saying:
+
+> "Forget Version 3 ever existed."
+
+### Important
+
+* Rewrites history.
+* Best for local branches.
+* Dangerous on shared branches because other people may already have those commits.
+
+---
+
+## 2. Git Revert
+
+### Definition
+
+`git revert` creates a new commit that reverses the changes introduced by an earlier commit.
+
+### Example
+
+Before:
+
+```text id="puxr7q"
+A --- B --- C (main)
+```
+
+Run:
+
+```bash id="wrmklx"
+git revert C
+```
+
+After:
+
+```text id="7c8om2"
+A --- B --- C --- C' (main)
+```
+
+`C'` is a new commit that undoes everything done in `C`.
+
+### Easy Analogy
+
+Instead of deleting a sentence from a document's history, you add another sentence:
+
+> "Ignore the changes made in Version 3."
+
+The history stays intact.
+
+---
+
+## Why Does Revert Create a New Commit?
+
+Suppose commit `C` added:
+
+```python id="lcnpqq"
+print("Hello")
+```
+
+`git revert C` creates a new commit that removes it:
+
+```python id="uk5z1n"
+# print("Hello") removed
+```
+
+The original commit remains in history, but its effects are canceled out.
+
+---
+
+## Reset vs Revert
+
+| Feature                     | `git reset`   | `git revert`           |
+| --------------------------- | ------------- | ---------------------- |
+| Removes commit from history | ✅ Yes         | ❌ No                   |
+| Creates a new commit        | ❌ No          | ✅ Yes                  |
+| Rewrites history            | ✅ Yes         | ❌ No                   |
+| Safe for shared branches    | ❌ No          | ✅ Yes                  |
+| Common use                  | Local cleanup | Undoing pushed commits |
+
+---
+
+### Quick Rule
+
+* **`git reset`** = "Pretend this commit never happened."
+* **`git revert`** = "Create a new commit that undoes this commit."
+
+That's why teams usually use **`git revert`** for commits that have already been pushed to a remote repository and shared with others.
+
+
+<img width="817" height="191" alt="image" src="https://github.com/user-attachments/assets/85cffc33-8fa0-4ee4-bc62-ecdc5a68243a" />
+
+
+</details>
