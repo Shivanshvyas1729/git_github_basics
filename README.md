@@ -442,3 +442,334 @@ That's why teams usually use **`git revert`** for commits that have already been
 
 
 </details>
+
+
+
+<details>
+<summary>Git Cherry-pick</summary>
+
+
+
+
+]
+
+       
+
+**Definition:**
+
+`git cherry-pick` lets you **copy one or more specific commits from one branch and apply them to your current branch**.
+
+Unlike merge or rebase, it does **not** bring the entire branch history—only the commits you explicitly choose.
+
+### Syntax
+
+```bash
+git cherry-pick <commit-hash>
+```
+
+or
+
+```bash
+git cherry-pick <commit1> <commit2> <commit3>
+```
+
+---
+
+### Example
+
+Suppose you have:
+
+```text
+main:
+A --- B --- C
+
+feature:
+      \
+       D --- E
+```
+
+You are on `main`:
+
+```text
+A --- B --- C (HEAD, main)
+
+       D --- E (feature)
+```
+
+You only want commit `E`, not the entire `feature` branch.
+
+Run:
+
+```bash
+git cherry-pick E
+```
+
+Result:
+
+```text
+A --- B --- C --- E' (main, HEAD)
+
+       D --- E (feature)
+```
+
+`E'` is a **copy** of `E` with a new commit hash.
+
+---
+
+### Why Use Cherry-pick?
+
+#### 1. Copy a bug fix
+
+A bug was fixed on `feature`:
+
+```text
+feature:
+D --- E (bug fix)
+```
+
+You need that fix on `main` immediately.
+
+```bash
+git checkout main
+git cherry-pick E
+```
+
+No need to merge the whole branch.
+
+---
+
+#### 2. Move specific work
+
+You accidentally committed to the wrong branch:
+
+```text
+main:
+A --- B --- C (important commit)
+```
+
+Switch to the correct branch:
+
+```bash
+git checkout feature
+git cherry-pick C
+```
+
+Now the commit exists on `feature` too.
+
+---
+
+### Cherry-pick vs Merge
+
+| Merge                            | Cherry-pick                  |
+| -------------------------------- | ---------------------------- |
+| Brings all commits from a branch | Brings selected commits only |
+| Preserves branch history         | Copies commits               |
+| Used for integrating branches    | Used for specific changes    |
+
+---
+
+### Easy Analogy
+
+Imagine a branch contains 10 changes:
+
+```text
+D E F G H I J K L M
+```
+
+* **Merge** = "Bring all 10 changes."
+* **Cherry-pick** = "Bring only `H` and `K`."
+
+```bash
+git cherry-pick H K
+```
+
+---
+
+### Key Point
+
+> **`git cherry-pick` copies selected commits and places them on top of your current branch (`HEAD`).** It is useful when you want specific changes without merging an entire branch.
+
+</details>
+
+
+
+
+
+<details>
+       <summary>Interactive Rebase</summary>
+       ### What is Interactive Rebase (`git rebase -i`)?
+
+**Interactive Rebase** is a special version of rebase that lets you **review, reorder, remove, combine, or edit commits before replaying them**.
+
+Basic syntax:
+
+```bash
+git rebase -i HEAD~4
+```
+
+This means:
+
+> "Open the last 4 commits and let me decide what to do with them."
+
+---
+
+### Example
+
+Suppose your history is:
+
+```text
+A --- B --- C --- D --- E (HEAD)
+```
+
+Running:
+
+```bash
+git rebase -i HEAD~4
+```
+
+selects:
+
+```text
+B --- C --- D --- E
+```
+
+Git opens a list like:
+
+```text
+pick B Add login
+pick C Fix typo
+pick D Add tests
+pick E Update README
+```
+
+---
+
+### What can you do?
+
+#### 1. Reorder commits
+
+Change:
+
+```text
+pick B
+pick C
+pick D
+pick E
+```
+
+to:
+
+```text
+pick B
+pick D
+pick C
+pick E
+```
+
+New history:
+
+```text
+A --- B' --- D' --- C' --- E'
+```
+
+Git recreates the commits in the new order.
+
+---
+
+#### 2. Drop commits
+
+Suppose you don't want commit `C`.
+
+Change:
+
+```text
+pick B
+pick C
+pick D
+pick E
+```
+
+to:
+
+```text
+pick B
+pick D
+pick E
+```
+
+Result:
+
+```text
+A --- B' --- D' --- E'
+```
+
+Commit `C` disappears.
+
+---
+
+### Why use `HEAD~4`?
+
+Recall:
+
+```text
+HEAD~1 = parent
+HEAD~2 = grandparent
+HEAD~4 = 4 commits back
+```
+
+So:
+
+```bash
+git rebase -i HEAD~4
+```
+
+means:
+
+> "Take all commits from `HEAD~4`'s child up to `HEAD` and let me edit them."
+
+---
+
+### Difference from Cherry-pick
+
+**Cherry-pick**
+
+```bash
+git cherry-pick C D E
+```
+
+* You already know exactly which commits you want.
+
+**Interactive Rebase**
+
+```bash
+git rebase -i HEAD~4
+```
+
+* Git shows you the commits first.
+* You can decide which to keep, remove, or reorder.
+
+---
+
+### Easy Analogy
+
+Imagine the last 4 commits are pages in a report:
+
+```text
+Page 1
+Page 2
+Page 3
+Page 4
+```
+
+Interactive rebase lets you:
+
+* Rearrange pages
+* Remove pages
+* Merge pages (in real Git)
+* Edit pages (in real Git)
+
+before creating the final version.
+
+That's why `git rebase -i` is one of the most powerful tools for cleaning up commit history before sharing your work.
+
+</details>
