@@ -1,0 +1,177 @@
+Git supports several **types of merges**, depending on the branch history and the merge strategy used.
+
+### 1. Fast-Forward Merge
+
+Occurs when the target branch has no new commits since the feature branch was created.
+
+```text
+A---B---C (main)
+         \
+          D---E (feature)
+```
+
+After merge:
+
+```text
+A---B---C---D---E (main)
+```
+
+Command:
+
+```bash
+git merge feature
+```
+
+Git simply moves the branch pointer forward; no merge commit is created.
+
+---
+
+### 2. Three-Way Merge (Recursive/Ort Merge)
+
+Occurs when both branches have diverged.
+
+```text
+A---B---C (main)
+     \
+      D---E (feature)
+```
+
+After merge:
+
+```text
+A---B---C------M (main)
+     \        /
+      D---E---
+```
+
+`M` is a merge commit with two parents.
+
+Command:
+
+```bash
+git merge feature
+```
+
+---
+
+### 3. Squash Merge
+
+Combines all commits from a branch into a single commit before merging.
+
+Before:
+
+```text
+main:    A---B
+feature:      C---D---E
+```
+
+After:
+
+```text
+A---B---F
+```
+
+`F` contains the changes from `C`, `D`, and `E` as one commit.
+
+Command:
+
+```bash
+git merge --squash feature
+git commit
+```
+
+---
+
+### 4. No-Fast-Forward Merge
+
+Creates a merge commit even when a fast-forward merge is possible.
+
+Command:
+
+```bash
+git merge --no-ff feature
+```
+
+Result:
+
+```text
+A---B---C------M
+         \    /
+          D--E
+```
+
+Useful for preserving branch history.
+
+---
+
+### 5. Octopus Merge
+
+Merges multiple branches into one commit.
+
+Command:
+
+```bash
+git merge branch1 branch2 branch3
+```
+
+Used mainly for integrating several independent branches simultaneously.
+
+---
+
+### 6. Rebase and Merge (Alternative to Merge)
+
+Not technically a merge strategy, but commonly used in workflows.
+
+Before:
+
+```text
+A---B---C (main)
+     \
+      D---E (feature)
+```
+
+After rebase:
+
+```text
+A---B---C---D'---E'
+```
+
+Commands:
+
+```bash
+git checkout feature
+git rebase main
+```
+
+Creates a linear history.
+
+---
+
+### Common Merge Strategies in Git
+
+Git also provides merge strategies:
+
+* **ort** (default since Git 2.34)
+* **recursive** (older default)
+* **resolve**
+* **octopus**
+* **ours**
+* **subtree**
+
+Example:
+
+```bash
+git merge -s ort feature
+```
+
+### Interview Answer (Short)
+
+The main types of Git merges are:
+
+1. **Fast-forward merge**
+2. **Three-way merge**
+3. **Squash merge**
+4. **No-fast-forward merge**
+5. **Octopus merge**
+
+Additionally, Git supports merge strategies such as **ort**, **recursive**, **resolve**, **ours**, and **subtree**.
