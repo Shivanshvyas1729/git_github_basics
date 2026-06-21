@@ -32,3 +32,51 @@
 ## TO CREATE AND CHECKOUT AT SAME TIME
 
 ### git checkout -b [yourbranchname]
+
+
+
+
+<details>
+<summary>Merge vs Rebase</summary>
+
+This content is hidden by default.
+
+
+### Git Merge — Definition
+
+**Git Merge** is a command that combines changes from one branch into another by creating a new commit (called a **merge commit**) when necessary, while preserving the complete history of both branches.
+
+**Example:**
+
+```bash
+git checkout main
+git merge feature
+```
+
+**Key point:** It keeps the original branch structure and history intact.
+
+---
+
+### Git Rebase — Definition
+
+**Git Rebase** is a command that moves or reapplies commits from one branch onto another branch, creating a linear commit history by rewriting commit history.
+
+**Example:**
+
+```bash
+git checkout feature
+git rebase main
+```
+
+**Key point:** It makes the project history cleaner and linear by replaying commits on top of the target branch.
+
+---
+
+### One-Line Difference
+
+* **Merge:** Combines branches and preserves branch history.
+* **Rebase:** Reapplies commits onto another branch to create a linear history.
+
+</details>
+
+
