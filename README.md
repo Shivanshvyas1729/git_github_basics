@@ -900,6 +900,18 @@ That's why `git rebase -i` is one of the most powerful tools for cleaning up com
 
 <details>
        <summary>Grabbling just one commits</summary>
-       <img width="1488" height="756" alt="image" src="https://github.com/user-attachments/assets/4a90f186-2db6-467b-b094-2435745b2d87" />
+       <img width="200" height="361" alt="image" src="https://github.com/user-attachments/assets/e286f53d-901e-44dd-bc68-b0128c60eeb2" />
+
+       * git rebase -i HEAD~2 --solution-ordering C3,C2
+       
+       * git commit --amend
+       
+       * git rebase -i HEAD~2 --solution-ordering C2'',C3'
+       
+       * git rebase caption main
+
+
+       
+
 
 </details>
