@@ -773,3 +773,10 @@ before creating the final version.
 That's why `git rebase -i` is one of the most powerful tools for cleaning up commit history before sharing your work.
 
 </details>
+
+
+<details>
+       <summary>Grabbling just one commits</summary>
+       <img width="1488" height="756" alt="image" src="https://github.com/user-attachments/assets/4a90f186-2db6-467b-b094-2435745b2d87" />
+
+</details>
