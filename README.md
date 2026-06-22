@@ -898,21 +898,42 @@ That's why `git rebase -i` is one of the most powerful tools for cleaning up com
 </details>
 
 
+
+
 <details>
-       <summary>Grabbling just one commits</summary>
-       i changed something in image now make changes in image commit c2 without making a new commit
-       <img width="200" height="361" alt="image" src="https://github.com/user-attachments/assets/e286f53d-901e-44dd-bc68-b0128c60eeb2" />
-
-       * git rebase -i HEAD~2 --solution-ordering C3,C2
+  <summary>Grabbing Just One Commit</summary>
        
-       * git commit --amend                  # amend update the latest commit only
-       
-       * git rebase -i HEAD~2 --solution-ordering C2'',C3'
-       
-       * git rebase caption main
+  ## we only need the last solution after main
+
+  <img width="830" height="583" alt="image" src="https://github.com/user-attachments/assets/471d4756-649c-4c0b-9ea7-b08658ad9b09" />
+
+  ```bash
+  git checkout c1
+  git cherry-pick c4
+</details>
 
 
-       
 
+
+
+
+<details>
+  <summary>Juggling Commits</summary>
+
+  We need to modify the `newImage` commit (`c2`). Since `git commit --amend` only works on the most recent commit, we first reorder the commits, amend `c2`, and then restore the original order.
+
+  > Note: `--solution-ordering` is specific to the Learn Git Branching simulator and is not available in real Git.
+
+  <img width="853" height="591" alt="image" src="https://github.com/user-attachments/assets/099a81da-113f-4ac1-96d8-5d6a3e6d12c1" />
+
+
+  ```bash
+  git rebase -i HEAD~2 --solution-ordering C3,C2
+
+  git commit --amend   # Modifies the most recent commit
+
+  git rebase -i HEAD~2 --solution-ordering C2'',C3'
+
+  git rebase caption main
 
 </details>
