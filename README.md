@@ -80,7 +80,130 @@ git rebase main
 </details>
 
 
+<details>
+       <summary>Rebase in more depth</summary>
+       
 
+**Syntax:**
+
+```bash
+git rebase <target> <branch>
+```
+
+### `git rebase main feature`
+
+Same starting point:
+
+```text
+main:    A---B
+              \
+feature:       C---D
+```
+
+Run:
+
+```bash
+git rebase main feature
+```
+
+Result:
+
+```text
+main:    A---B
+              \
+feature:       C'---D'
+```
+
+Meaning:
+
+> Take **feature** and replay its commits on top of **main**.
+
+Equivalent to:
+
+```bash
+git checkout feature
+git rebase main
+```
+
+
+
+
+
+### 2. `git rebase main`
+
+**Syntax:**
+
+```bash
+git rebase <target>
+```
+
+Meaning:
+
+> Rebase the **current branch (HEAD)** onto `<target>`.=
+
+
+### `git rebase main`
+
+If you're currently on `feature`:
+
+```text
+main:    A---B
+              \
+feature:       C---D   (HEAD)
+```
+
+Run:
+
+```bash
+git rebase main
+```
+
+Result:
+
+```text
+main:    A---B
+              \
+feature:       C'---D'
+```
+
+Meaning:
+
+> Take the **current branch** (`feature`) and replay its commits on top of **main**.
+
+---
+
+
+---
+
+### Difference
+
+| Command                   | Branch being rebased        |
+| ------------------------- | --------------------------- |
+| `git rebase main`         | Current branch (HEAD)       |
+| `git rebase main feature` | Explicitly `feature` branch |
+
+So:
+
+```bash
+git rebase main
+```
+
+= "Put **my current branch** on top of `main`."
+
+```bash
+git rebase main feature
+```
+
+= "Put **feature** on top of `main`, regardless of where I currently am."
+
+
+Meaning:
+
+> Take the **current branch** (`feature`) and replay its commits on top of **main**.
+
+---
+
+</details>
 
 
 <details>
