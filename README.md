@@ -898,42 +898,44 @@ That's why `git rebase -i` is one of the most powerful tools for cleaning up com
 </details>
 
 
-
-
 <details>
   <summary>Grabbing Just One Commit</summary>
-       
-  ## we only need the last solution after main
+
+  We only need to copy the changes from the last commit (`c4`) onto the branch starting at `c1`.
 
   <img width="830" height="583" alt="image" src="https://github.com/user-attachments/assets/471d4756-649c-4c0b-9ea7-b08658ad9b09" />
 
   ```bash
   git checkout c1
   git cherry-pick c4
+  ```
+
 </details>
-
-
-
-
-
 
 <details>
   <summary>Juggling Commits</summary>
 
   We need to modify the `newImage` commit (`c2`). Since `git commit --amend` only works on the most recent commit, we first reorder the commits, amend `c2`, and then restore the original order.
 
-  > Note: `--solution-ordering` is specific to the Learn Git Branching simulator and is not available in real Git.
+  > **Note:** `--solution-ordering` is specific to the Learn Git Branching simulator and is not available in real Git.
 
   <img width="853" height="591" alt="image" src="https://github.com/user-attachments/assets/099a81da-113f-4ac1-96d8-5d6a3e6d12c1" />
-
 
   ```bash
   git rebase -i HEAD~2 --solution-ordering C3,C2
 
-  git commit --amend   # Modifies the most recent commit
+  git commit --amend
 
   git rebase -i HEAD~2 --solution-ordering C2'',C3'
 
   git rebase caption main
+  ```
+
+  **Explanation**
+
+  1. Reorder the commits so that `c2` becomes the most recent commit.
+  2. Amend `c2` using `git commit --amend`.
+  3. Restore the original commit order.
+  4. Move `main` to the updated history.
 
 </details>
